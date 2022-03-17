@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <title>ChatBot</title>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+
+        <div id="chatbox">
+          <p class="botText">
+            <span>Hi! I'm ChatBot</span>
+          </p>
+        </div>
+
+        <div id="userInput">
+          <input id="textInput" type="text" name="msg" placeholder="Enter message here..." />
+        </div>
+
+      </div>
+      <script>
+        function getBotResponse() {
+
+          <!--taking text from textfield-->
+          var rawText = $("#textInput").val();
+
+          <!--making a p tag with that rawText-->
+          var userMessage = '<p class="userText"><span>' + rawText + "</span></p>";
+
+          <!--append userMessage to div with id = chatbox-->
+          $("#chatbox").append(userMessage);
+
+          <!--Setting that input field back to ""(empty)-->
+          $("#textInput").val("");
+
+          <!--same for botMessage-->
+          $.get("/get", { msg: rawText }).done(function(data) {
+            var botMessage = '<p class="botText"><span>' + data + "</span></p>";
+            $("#chatbox").append(botMessage);
+          });
+        }
+        <!--function close-->
+
+
+        <!--13 for enter key,    try to add send button-->
+        $("#textInput").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+
+      </script>
+    </div>
+  </body>
+</html>
