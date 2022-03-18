@@ -1,6 +1,8 @@
 
 from flask import *
 
+import chatbot
+
 app = Flask(__name__)
 
 
@@ -8,12 +10,10 @@ app = Flask(__name__)
 def sendToWebsite():
     return render_template("chatbotPage.html")
 
-i = 0
 @app.route("/get")
 def getFromWebsite():
-    global i
-    i+=1
-    return str(i)
+    s = chatbot.getMessage();
+    return s
 
 
 
