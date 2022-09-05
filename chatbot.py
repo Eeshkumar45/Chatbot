@@ -1,2 +1,2 @@
 def getMessage():
-    return "'this is demo message from chatbot'"
+    return "'this is message from chatbot'"
